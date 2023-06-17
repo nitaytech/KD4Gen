@@ -1,0 +1,187 @@
+last_layer:
+  student_enc_hidden_layer: -1
+  teacher_enc_hidden_layer: -1
+  student_dec_hidden_layer: -1
+  teacher_dec_hidden_layer: -1
+  student_enc_sa_layer: -1
+  teacher_enc_sa_layer: -1
+  student_dec_sa_layer: -1
+  teacher_dec_sa_layer: -1
+  student_dec_ca_layer: -1
+  teacher_dec_ca_layer: -1
+mid_sa_last_ca_layer:
+  student_enc_hidden_layer: -1
+  teacher_enc_hidden_layer: -3
+  student_dec_hidden_layer: -1
+  teacher_dec_hidden_layer: -3
+  student_enc_sa_layer: -1
+  teacher_enc_sa_layer: -3
+  student_dec_sa_layer: -1
+  teacher_dec_sa_layer: -3
+  student_dec_ca_layer: -1
+  teacher_dec_ca_layer: -1
+mid_sa_first_ca_layer:
+  student_enc_hidden_layer: -1
+  teacher_enc_hidden_layer: -1
+  student_dec_hidden_layer: -1
+  teacher_dec_hidden_layer: -1
+  student_enc_sa_layer: -1
+  teacher_enc_sa_layer: -3
+  student_dec_sa_layer: -1
+  teacher_dec_sa_layer: -3
+  student_dec_ca_layer: 0
+  teacher_dec_ca_layer: 0
+last_sa_first_ca_layer:
+  student_enc_hidden_layer: -1
+  teacher_enc_hidden_layer: -1
+  student_dec_hidden_layer: -1
+  teacher_dec_hidden_layer: -1
+  student_enc_sa_layer: -1
+  teacher_enc_sa_layer: -1
+  student_dec_sa_layer: -1
+  teacher_dec_sa_layer: -1
+  student_dec_ca_layer: 0
+  teacher_dec_ca_layer: 0
+
+no_scheduling:
+  keep_last: True
+  random_sample: False
+epoch_scheduling:
+  change_every_n_epochs: 1
+  keep_last: False
+  random_sample: False
+3_epochs_scheduling:
+  change_every_n_epochs: 3
+  keep_last: True
+  random_sample: False
+patience_epochs_scheduling:
+  change_every_n_epochs: 16
+  keep_last: True
+  random_sample: False
+
+forward:
+  forward_weight: 1.0
+  logits_weight: 0.0
+  hidden_weight: 0.0
+  attention_relation_weight: 0.0
+  temperature: 1.0
+  kl_loss: False
+  loss_scale: null
+logits:
+  forward_weight: 0.0
+  logits_weight: 1.0
+  hidden_weight: 0.0
+  attention_relation_weight: 0.0
+  temperature: 1.0
+  kl_loss: False
+  loss_scale: null
+logits_dropout:
+  forward_weight: 0.0
+  logits_weight: 1.0
+  hidden_weight: 0.0
+  attention_relation_weight: 0.0
+  temperature: 1.0
+  kl_loss: False
+  loss_scale: null
+  dropout: True
+
+logits_gens:
+  forward_weight: 0.0
+  logits_weight: 1.0
+  hidden_weight: 0.0
+  attention_relation_weight: 0.0
+  temperature: 1.0
+  kl_loss: False
+  loss_scale: null
+  generate_labels_weight: 1.0
+logits_gens_05:
+  forward_weight: 0.0
+  logits_weight: 1.0
+  hidden_weight: 0.0
+  attention_relation_weight: 0.0
+  temperature: 1.0
+  kl_loss: False
+  loss_scale: null
+  generate_labels_weight: 0.5
+
+hidden_kl_logits:
+  forward_weight: 0.0
+  logits_weight: 0.5
+  hidden_weight: 0.5
+  attention_relation_weight: 0.0
+  temperature: 1.0
+  kl_loss: True
+  loss_scale: True
+hidden_kl_logits_gen:
+  forward_weight: 0.0
+  logits_weight: 0.5
+  hidden_weight: 0.5
+  attention_relation_weight: 0.0
+  temperature: 1.0
+  kl_loss: True
+  loss_scale: True
+  generate_labels_weight: 0.5
+
+attention_kl_logits:
+  forward_weight: 0.0
+  logits_weight: 0.5
+  hidden_weight: 0.0
+  attention_relation_weight: 0.5
+  temperature: 1.0
+  kl_loss: True
+  loss_scale: True
+attention_kl_logits_gen:
+  forward_weight: 0.0
+  logits_weight: 0.5
+  hidden_weight: 0.0
+  attention_relation_weight: 0.5
+  temperature: 1.0
+  kl_loss: True
+  loss_scale: True
+  generate_labels_weight: 0.5
+
+finetuning:
+  name: finetuning
+  layer: last_layer
+  scheduling: no_scheduling
+  losses: [forward]
+logits_kd:
+  name: wl_kd
+  layer: last_layer
+  scheduling: no_scheduling
+  losses: [logits]
+logits_kd_student_gens:
+  name: wl_kd_with_student_gens
+  layer: last_layer
+  scheduling: no_scheduling
+  losses: [logits_gens]
+noisy_kd:
+  name: noisy_kd
+  layer: last_layer
+  scheduling: no_scheduling
+  losses: [logits_dropout]
+attention_kd:
+  name: ar_kd
+  layer: last_layer
+  scheduling: no_scheduling
+  losses: [attention_kl_logits]
+attention_kd_student_gens:
+  name: ar_kd_with_student_gens
+  layer: last_layer
+  scheduling: no_scheduling
+  losses: [attention_kl_logits_gen]
+hidden_kd:
+  name: hr_kd
+  layer: last_layer
+  scheduling: no_scheduling
+  losses: [hidden_kl_logits]
+hidden_kd_student_gens:
+  name: hr_kd_with_student_gens
+  layer: last_layer
+  scheduling: no_scheduling
+  losses: [hidden_kl_logits_gen]
+logits_kd_student_gens_co_teaching:
+  name: wl_kd_with_co_teaching
+  layer: last_layer
+  scheduling: no_scheduling
+  losses: [logits_gens_05]
