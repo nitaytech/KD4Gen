@@ -91,7 +91,7 @@ python kd_main.py --max_input_length 48 --max_labels_length 48 --task_prompt mod
 
 Note: The `kd_main.py` script is mainly based on the function `src.kd_models_accelerator_multiple_loaders.train_kd`. <br>
 Please see the arguments of `kd_main.py`. <br>
-Replace the `********.pt` with the path to the teacher's checkpoint. <br>
+Replace the `********.pt` with the path to the teacher's checkpoint. <br><br>
 Important: You can apply different KD techniques by specifying the `--experiment_config_key` argument. For example: `finetuning, logits_kd, noisy_kd, attention_kd, logits_kd_student_gens_co_teaching, logits_kd_student_gens`<br> 
 You can also implement your own custom KD technique by modifying the `arg_configs.kd_experiment_configs.yaml` YAML file, see the `logits_kd` key for example. <br> 
 You can also distill the teacher without PTs (only the original data) by using the `--dataset_path ./datasets/original/shakespeare_7k.json` argument. <br>
