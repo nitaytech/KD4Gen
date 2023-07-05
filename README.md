@@ -14,7 +14,7 @@ ______________________________________________________________________
 ### Official code repository for the ACL'2023 paper: <br> ["A Systematic Study of Knowledge Distillation for Natural Language Generation with Pseudo-Target Training"](https://arxiv.org/abs/2305.02031)
 
 
-![Study](figures/study_diagram.png)
+![Study](figures/study_diagram.PNG)
 
 If you use this code please cite our paper (see [below](#citation)).
 
